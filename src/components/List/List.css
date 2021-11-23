@@ -1,0 +1,29 @@
+body {
+  background-color: #f4f4f4;
+}
+
+.list {
+  max-width: 800px;
+  margin: auto;
+  background-color: #f4f4f4;
+}
+
+.button__corner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: none;
+  border: 0px solid grey;
+  margin: 1px 0 0 1px;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}
+
+.button__corner:hover {
+  margin: 0;
+  border-width: 1px;
+}

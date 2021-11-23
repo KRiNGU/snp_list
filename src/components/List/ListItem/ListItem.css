@@ -1,0 +1,50 @@
+.list__item {
+    position: relative;
+    display: flex;
+    list-style-type: none;
+    max-width: 1200px;
+    margin: auto;
+    padding: 5px 10px 5px 40px;
+    border-radius: 2px;
+    align-items: center;
+    background-color: #fff;
+    margin-top: 5px;
+}
+
+.list_item:first-child {
+    margin-top: 0;
+}
+
+.item__property {
+    font-family:'Times New Roman', Times, serif;
+    overflow: hidden;
+}
+
+.id {
+    width: 100%;
+    max-width: 5%;
+}
+
+.name {
+    width: 100%;
+    max-width: 15%;
+}
+
+.phoneNumbers {
+    width: 100%;
+    max-width: 20%;
+}
+
+.placeOfResidence {
+    width: 100%;
+}
+
+.item__change {
+    visibility: hidden;
+    position: absolute;
+    right: 10px;
+}
+
+.list__item:hover .item__change {
+    visibility: visible;
+}

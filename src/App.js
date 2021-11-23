@@ -1,24 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import List from './components/List/List';
+
+const items = [{
+  id: '1',
+  name: 'Лобашов',
+  phoneNumbers: '980102848012',
+  placeOfResidence: 'asdasdasasd',
+}, {
+  id: '2',
+  name: 'Лобашов Александр Максимович',
+  phoneNumbers: '8-996-922-10-64',
+  placeOfResidence: 'Российская Федерация, обл. Тверская, г. Вышний Волочёк, ул. Чехова, д. 31'}
+];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <List 
+      items={items}
+    />
   );
 }
 

@@ -1,0 +1,79 @@
+body {
+    background-color: #f4f4f4;
+}
+
+.element__background {
+    background-color: #fff;
+    padding: 20px 100px;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px grey;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 500px;
+}
+
+.element__title {
+    text-align: center;
+}
+
+.element__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+}
+
+.element__property {
+    margin-top: 5px;
+    padding-bottom: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.element__property:not(:last-child) {
+    border-bottom: 1px solid grey;
+}
+
+.property__name {
+    min-width: 150px;
+}
+
+.property__parameter {
+    overflow: hidden;
+    word-wrap: break-word;
+    margin-left: 10px;
+}
+
+.button__change {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.button__exit {
+    top: 20px;
+    right: 20px;
+}
+
+.button {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    padding: 1px 0 0 1px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    border-radius: 5px;
+    border: 1px solid grey;
+    padding: 0;
+}

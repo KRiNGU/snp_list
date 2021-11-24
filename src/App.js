@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import List from './components/List/List';
 import Element from './components/Element/Element';
+import { useSelector } from 'react-redux';
 
 const items = [{
   id: '1',
@@ -16,6 +17,8 @@ const items = [{
 ];
 
 function App() {
+  const state = useSelector(state => (state));
+  console.log(state);
   return (
     <Router>
         <Switch>

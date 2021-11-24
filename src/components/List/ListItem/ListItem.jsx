@@ -1,6 +1,7 @@
 import { memo } from "react";
 import './ListItem.css';
 import {MdOutlineOpenInFull} from 'react-icons/md';
+import { Link } from "react-router-dom";
 
 const ListItem = ({id, name, phoneNumbers, placeOfResidence}) => {
     return(
@@ -9,7 +10,13 @@ const ListItem = ({id, name, phoneNumbers, placeOfResidence}) => {
             <div className="item__property name">{name}</div>
             <div className="item__property phoneNumbers">{phoneNumbers}</div>
             <div className="item__property placeOfResidence">{placeOfResidence}</div>
-            <button className="item__change"><MdOutlineOpenInFull /></button>
+                <button className="item__change">
+                    <Link to={`/items/${id}`} className="link"> 
+                        <MdOutlineOpenInFull 
+                            color="black"
+                        />
+                    </Link>
+                </button>
         </li>
     );
 };

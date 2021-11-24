@@ -2,6 +2,7 @@ import { memo } from 'react';
 import './Element.css';
 import { BsFillPencilFill } from 'react-icons/bs';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const Element = ({ id, name, phoneNumber, placeOfResidence }) => {
   return (
@@ -10,7 +11,11 @@ const Element = ({ id, name, phoneNumber, placeOfResidence }) => {
         <BsFillPencilFill />
       </button>
       <button className="button button__exit">
-        <AiOutlineArrowLeft />
+        <Link to="/">
+          <AiOutlineArrowLeft 
+            color="black"
+          />
+        </Link>
       </button>
       <h2 className="element__title">Информация о человеке</h2>
       <ul className="element__list">

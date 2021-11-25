@@ -28,3 +28,7 @@ body {
   margin: 0;
   border-width: 1px;
 }
+
+.button__corner a {
+  height: 40px;
+}

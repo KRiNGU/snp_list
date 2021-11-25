@@ -9,7 +9,6 @@ export const listSlice = createSlice({
     initialState,
     reducers: {
         changeName: (state, {payload}) => {
-            console.log(typeof payload.id, typeof state.items[0].id);
             state.items.filter(item => item.id === payload.id)[0].name = payload.value;
             localStorage.setItem('items', JSON.stringify(state.items));
         },

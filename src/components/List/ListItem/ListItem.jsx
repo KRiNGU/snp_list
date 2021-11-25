@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import './ListItem.css';
 import {MdOutlineOpenInFull} from 'react-icons/md';
 import {AiFillDelete} from 'react-icons/ai';
@@ -8,7 +8,7 @@ import { deleteElement } from "../../../state/List/reducer";
 
 const ListItem = ({id, name, phoneNumber, placement}) => {
     const dispatch = useDispatch();
-    const handleDelete = () => dispatch(deleteElement({id}));
+    const handleDelete = useCallback(() => dispatch(deleteElement({id})), [dispatch, id]);
 
     return(
         <li className="list__item">

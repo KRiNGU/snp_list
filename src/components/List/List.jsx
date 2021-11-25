@@ -1,6 +1,6 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { IoIosAddCircle } from 'react-icons/io';
-import Filter from '../Filter/Filter';
+import Filter from './Filter/Filter';
 import ListItem from './ListItem/ListItem';
 import ListParameters from './ListParameters/ListParameters';
 import './List.css';
@@ -11,16 +11,31 @@ import { Link } from 'react-router-dom';
 const List = () => {
 
   const dispatch = useDispatch();
-  const items = useSelector(state => state.items);
   const newId = Date.now().toString().slice(1);
+  const [filterWord, setFilterWord] = useState('');
 
   const handleAdd = useCallback(() => {
     dispatch(addElement({newId}));
   }, [dispatch, newId]);
 
+  const changeFilterWord = useCallback((value) => {
+    setFilterWord(value);
+  }, [setFilterWord]);
+
+  const doFilter = useCallback((items) => {
+    let filteredItems = items.filter(item => item.id.match(filterWord));
+    filteredItems = filteredItems.concat(items.filter(item => item.name.toLowerCase().match(filterWord)));
+    filteredItems = filteredItems.concat(items.filter(item => item.phoneNumber.toLowerCase().match(filterWord)));
+    filteredItems = filteredItems.concat(items.filter(item => item.placement.toLowerCase().match(filterWord)));
+    return [...new Set(filteredItems)];
+  }, [filterWord]);
+  const items = useSelector(state => doFilter(state.items));
+
   return (
     <div className="list">
-      <Filter />
+      <Filter 
+        changeFilterFunction={changeFilterWord}
+      />
       <ListParameters />
       {items.map((item) => (
         <ListItem

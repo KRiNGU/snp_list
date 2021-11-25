@@ -2,23 +2,20 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import List from './components/List/List';
 import Element from './components/Element/Element';
-import { useSelector } from 'react-redux';
 
 const items = [{
   id: '1',
   name: 'Лобашов',
   phoneNumber: '980102848012',
-  placeOfResidence: 'asdasdasasd',
+  placement: 'asdasdasasd',
 }, {
   id: '2',
   name: 'Лобашов Александр Максимович',
   phoneNumber: '8-996-922-10-64',
-  placeOfResidence: 'Российская Федерация, обл. Тверская, г. Вышний Волочёк, ул. Чехова, д. 31'}
+  placement: 'Российская Федерация, обл. Тверская, г. Вышний Волочёк, ул. Чехова, д. 31'}
 ];
 
 function App() {
-  const state = useSelector(state => (state));
-  console.log(state);
   return (
     <Router>
         <Switch>

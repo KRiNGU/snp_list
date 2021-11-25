@@ -6,8 +6,8 @@ const ListParameters = () => {
         <li className="parameters">
             <div className="parameter id">ID</div>
             <div className="parameter name">Name</div>
-            <div className="parameter phoneNumbers">Phone Number</div>
-            <div className="parameter placeOfResidence">Place of Residence</div>
+            <div className="parameter phoneNumber">Phone Number</div>
+            <div className="parameter placement">Place of Residence</div>
         </li>
     );
 };

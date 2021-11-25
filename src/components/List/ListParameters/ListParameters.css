@@ -13,6 +13,7 @@
 .parameter {
     font-weight: bold;
     line-height: 32px;
+    padding-right: 5px;
 }
 
 .parameter:not(:first-child) {

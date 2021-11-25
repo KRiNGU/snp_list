@@ -1,11 +1,23 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { IoIosAddCircle } from 'react-icons/io';
 import Filter from '../Filter/Filter';
 import ListItem from './ListItem/ListItem';
 import ListParameters from './ListParameters/ListParameters';
 import './List.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { addElement } from '../../state/List/reducer';
+import { Link } from 'react-router-dom';
 
-const List = ({items}) => {
+const List = () => {
+
+  const dispatch = useDispatch();
+  const items = useSelector(state => state.items);
+  const newId = Date.now().toString().slice(1);
+
+  const handleAdd = useCallback(() => {
+    dispatch(addElement({newId}));
+  }, [dispatch, newId]);
+
   return (
     <div className="list">
       <Filter />
@@ -15,12 +27,14 @@ const List = ({items}) => {
           key={item.id}
           id={item.id}
           name={item.name}
-          phoneNumbers={item.phoneNumbers}
-          placeOfResidence={item.placeOfResidence}
+          phoneNumber={item.phoneNumber}
+          placement={item.placement}
         />
       ))}
-      <button className="button__corner">
-        <IoIosAddCircle size="40px" />
+      <button className="button__corner" onClick={handleAdd}>
+        <Link to={`/items/${newId}`}>
+          <IoIosAddCircle color='black' size="40px" />
+        </Link>
       </button>
     </div>
   );

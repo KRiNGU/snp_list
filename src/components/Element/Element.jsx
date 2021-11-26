@@ -12,13 +12,13 @@ import {
 
 const Element = ({ editing=true }) => {
   const { id } = useParams();
-  const userInfo = useSelector((store) => store.items.filter(item => item.id === id)[0] || {});
+  const userInfo = useSelector((store) => store.items.filter(item => item.id === id)[0]);
   const [isNameEditing, setIsNameEditing] = useState(editing);
   const [isPhoneEditing, setIsPhoneEditing] = useState(editing);
   const [isPlacementEditing, setIsPlacementEditing] = useState(editing);
-  const [name, setName] = useState(userInfo.name);
-  const [phoneNumber, setPhoneNumber] = useState(userInfo.phoneNumber);
-  const [placement, setPlacement] = useState(userInfo.placement);
+  const [name, setName] = useState(userInfo?.name);
+  const [phoneNumber, setPhoneNumber] = useState(userInfo?.phoneNumber);
+  const [placement, setPlacement] = useState(userInfo?.placement);
   const dispatch = useDispatch();
 
   const handleChange = useCallback(() => {
@@ -91,6 +91,10 @@ const Element = ({ editing=true }) => {
     }
   }, [setIsPlacementEditing]);
 
+  if (!userInfo) {
+    return(<h2>Отсутствует пользователь с таким id</h2>)
+  }
+  
   return (
     <div className="element__background">
       <button className="button button__change" onClick={handleChange}>

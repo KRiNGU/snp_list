@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback } from 'react';
 import { IoIosAddCircle } from 'react-icons/io';
 import Filter from './Filter/Filter';
 import ListItem from './ListItem/ListItem';
@@ -6,21 +6,18 @@ import ListParameters from './ListParameters/ListParameters';
 import './List.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addElement } from '../../state/List/reducer';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const List = () => {
 
   const dispatch = useDispatch();
   const newId = Date.now().toString().slice(1);
-  const [filterWord, setFilterWord] = useState('');
+  let {filterWord} = useParams();
+  filterWord = filterWord?.toLowerCase();
 
   const handleAdd = useCallback(() => {
     dispatch(addElement({newId}));
   }, [dispatch, newId]);
-
-  const changeFilterWord = useCallback((value) => {
-    setFilterWord(value);
-  }, [setFilterWord]);
 
   const doFilter = useCallback((items) => {
     let filteredItems = items.filter(item => item.id.match(filterWord));
@@ -29,13 +26,12 @@ const List = () => {
     filteredItems = filteredItems.concat(items.filter(item => item.placement.toLowerCase().match(filterWord)));
     return [...new Set(filteredItems)];
   }, [filterWord]);
+
   const items = useSelector(state => doFilter(state.items));
 
   return (
     <div className="list">
-      <Filter 
-        changeFilterFunction={changeFilterWord}
-      />
+      <Filter />
       <ListParameters />
       {items.map((item) => (
         <ListItem

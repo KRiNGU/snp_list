@@ -1,11 +1,16 @@
 import { memo, useCallback } from "react";
+import { useHistory } from "react-router";
 import "./Filter.css";
 
-const Filter = ({changeFilterFunction}) => {
+const Filter = () => {
+    const history = useHistory();
 
     const handleChange = useCallback((e) => {
-        changeFilterFunction(e.target.value);
-    }, [changeFilterFunction]);
+        history.replace(`/search=${e.target.value}`)
+        if (!e.target.value) {
+            history.replace('/');
+        }
+    }, [history]);
 
     return(
         <input type="text" className="filter-input" placeholder="Type to search..." onChange={handleChange}/>

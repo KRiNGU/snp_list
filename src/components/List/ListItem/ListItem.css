@@ -24,6 +24,7 @@
 .id {
     width: 100%;
     max-width: 7%;
+    padding-right: 20px;
 }
 
 .name {

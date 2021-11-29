@@ -1,4 +1,4 @@
-import { memo, useCallback } from "react";
+import { memo, useCallback } from 'react';
 import './ListItem.css';
 import {MdOutlineOpenInFull} from 'react-icons/md';
 import {AiFillDelete} from 'react-icons/ai';
@@ -12,7 +12,7 @@ const ListItem = ({id, name, phoneNumber, placement}) => {
     const handleDelete = useCallback(() => dispatch(deleteElement({id})), [dispatch, id]);
 
     return(
-        <li className="list__item">
+        <div className="list__item">
             <div className="item__property id">{id}</div>
             <div className="item__property name">{name}</div>
             <div className="item__property phoneNumber">{phoneNumber}</div>
@@ -27,7 +27,7 @@ const ListItem = ({id, name, phoneNumber, placement}) => {
             <button className="button item__delete" onClick={handleDelete}>
                 <AiFillDelete />
             </button>
-        </li>
+        </div>
     );
 };
 

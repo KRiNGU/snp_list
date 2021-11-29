@@ -7,11 +7,11 @@ import './List.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addElement } from '../../state/List/reducer';
 import { Link } from 'react-router-dom';
-import { useLocation } from "react-router";
+import { useLocation } from 'react-router';
+import queryString from 'query-string';
 
 const List = () => {
   const dispatch = useDispatch();
-  const queryString = require('query-string');
   const location = useLocation();
   const parsedLocation = queryString.parse(location.search);
   const newId = Date.now().toString().slice(1);
@@ -25,11 +25,10 @@ const List = () => {
     if (!filterWord) {
       return items;
     }
-    let filteredItems = items.filter(item => item.id.includes(filterWord));
-    filteredItems = filteredItems.concat(items.filter(item => item.name.toLowerCase().includes(filterWord)));
-    filteredItems = filteredItems.concat(items.filter(item => item.phoneNumber.toLowerCase().includes(filterWord)));
-    filteredItems = filteredItems.concat(items.filter(item => item.placement.toLowerCase().includes(filterWord)));
-    return [...new Set(filteredItems)];
+    return items.filter(item => item.id.includes(filterWord) 
+                                || item.name.toLowerCase().includes(filterWord) 
+                                || item.phoneNumber.includes(filterWord) 
+                                || item.placement.toLowerCase().includes(filterWord))
   }, [filterWord]);
 
   const items = useSelector(state => doFilter(state.items));

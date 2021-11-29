@@ -13,9 +13,6 @@ const App = () => (
           <Route path="/items/:id">
             <Element /> 
           </Route>
-          <Route path={`/?search=:filterWord`}>
-            <List />
-          </Route>
         </Switch>
     </Router>
 );

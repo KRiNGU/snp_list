@@ -1,15 +1,12 @@
-import { memo, useCallback } from "react";
-import { useHistory } from "react-router";
-import "./Filter.css";
+import { memo, useCallback } from 'react';
+import { useHistory } from 'react-router';
+import './Filter.css';
 
 const Filter = () => {
     const history = useHistory();
 
     const handleChange = useCallback((e) => {
-        history.replace(`/?search=${e.target.value}`)
-        if (!e.target.value) {
-            history.replace('/');
-        }
+        history.replace(e.target.value ? `/?search=${e.target.value}` : history.replace('/'));
     }, [history]);
 
     return(

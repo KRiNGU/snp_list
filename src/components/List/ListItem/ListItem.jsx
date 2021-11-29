@@ -32,7 +32,7 @@ const ListItem = ({id, name, phoneNumber, placement}) => {
 };
 
 ListItem.propTypes = {
-    id: PropTypes.number,
+    id: PropTypes.string,
     name: PropTypes.string,
     phoneNumber: PropTypes.string,
     placeholder: PropTypes.string,

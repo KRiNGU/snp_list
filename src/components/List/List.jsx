@@ -6,13 +6,16 @@ import ListParameters from './ListParameters/ListParameters';
 import './List.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addElement } from '../../state/List/reducer';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useLocation } from "react-router";
 
 const List = () => {
   const dispatch = useDispatch();
+  const queryString = require('query-string');
+  const location = useLocation();
+  const parsedLocation = queryString.parse(location.search);
   const newId = Date.now().toString().slice(1);
-  let {filterWord} = useParams();
-  filterWord = filterWord?.toLowerCase();
+  const filterWord = parsedLocation.search?.toLowerCase();
 
   const handleAdd = useCallback(() => {
     dispatch(addElement({newId}));

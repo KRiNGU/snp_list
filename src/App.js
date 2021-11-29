@@ -5,7 +5,7 @@ import Element from './components/Element/Element';
 import { memo } from 'react';
 
 const App = () => (
-    <Router>
+    <Router basename="/snp_list">
         <Switch>
           <Route exact path="/">
             <List />

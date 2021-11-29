@@ -5,6 +5,7 @@ import {AiFillDelete} from 'react-icons/ai';
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteElement } from "../../../state/List/reducer";
+import PropTypes from 'prop-types';
 
 const ListItem = ({id, name, phoneNumber, placement}) => {
     const dispatch = useDispatch();
@@ -29,5 +30,12 @@ const ListItem = ({id, name, phoneNumber, placement}) => {
         </li>
     );
 };
+
+ListItem.propTypes = {
+    id: PropTypes.number,
+    name: PropTypes.string,
+    phoneNumber: PropTypes.string,
+    placeholder: PropTypes.string,
+}
 
 export default memo(ListItem);

@@ -9,7 +9,6 @@ import { addElement } from '../../state/List/reducer';
 import { Link, useParams } from 'react-router-dom';
 
 const List = () => {
-
   const dispatch = useDispatch();
   const newId = Date.now().toString().slice(1);
   let {filterWord} = useParams();

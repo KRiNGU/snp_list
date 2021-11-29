@@ -10,12 +10,12 @@ import {
   changePlacement,
 } from '../../state/List/reducer';
 
-const Element = ({ editing=true }) => {
+const Element = () => {
   const { id } = useParams();
   const userInfo = useSelector((store) => store.items.filter(item => item.id === id)[0]);
-  const [isNameEditing, setIsNameEditing] = useState(editing);
-  const [isPhoneEditing, setIsPhoneEditing] = useState(editing);
-  const [isPlacementEditing, setIsPlacementEditing] = useState(editing);
+  const [isNameEditing, setIsNameEditing] = useState(true);
+  const [isPhoneEditing, setIsPhoneEditing] = useState(true);
+  const [isPlacementEditing, setIsPlacementEditing] = useState(true);
   const [name, setName] = useState(userInfo?.name);
   const [phoneNumber, setPhoneNumber] = useState(userInfo?.phoneNumber);
   const [placement, setPlacement] = useState(userInfo?.placement);

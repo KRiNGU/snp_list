@@ -22,10 +22,13 @@ const List = () => {
   }, [dispatch, newId]);
 
   const doFilter = useCallback((items) => {
-    let filteredItems = items.filter(item => item.id.match(filterWord));
-    filteredItems = filteredItems.concat(items.filter(item => item.name.toLowerCase().match(filterWord)));
-    filteredItems = filteredItems.concat(items.filter(item => item.phoneNumber.toLowerCase().match(filterWord)));
-    filteredItems = filteredItems.concat(items.filter(item => item.placement.toLowerCase().match(filterWord)));
+    if (!filterWord) {
+      return items;
+    }
+    let filteredItems = items.filter(item => item.id.includes(filterWord));
+    filteredItems = filteredItems.concat(items.filter(item => item.name.toLowerCase().includes(filterWord)));
+    filteredItems = filteredItems.concat(items.filter(item => item.phoneNumber.toLowerCase().includes(filterWord)));
+    filteredItems = filteredItems.concat(items.filter(item => item.placement.toLowerCase().includes(filterWord)));
     return [...new Set(filteredItems)];
   }, [filterWord]);
 

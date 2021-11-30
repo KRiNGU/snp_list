@@ -1,40 +1,40 @@
 .parameters {
-    display: flex;
-    list-style-type: none;
-    max-width: 1200px;
-    margin: auto;
-    border-bottom: 1px solid grey;
-    padding: 0 10px 0 40px;
-    border-radius: 2px;
-    align-items: center;
-    margin-top: 10px;
+  display: flex;
+  list-style-type: none;
+  max-width: 1200px;
+  margin: auto;
+  border-bottom: 1px solid grey;
+  padding: 0 10px 0 40px;
+  border-radius: 2px;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .parameter {
-    font-weight: bold;
-    line-height: 32px;
-    padding-right: 5px;
+  font-weight: bold;
+  line-height: 32px;
+  padding-right: 5px;
 }
 
 .id {
-    width: 100%;
-    max-width: 7%;
+  width: 100%;
+  max-width: 7%;
 }
 
 .name {
-    width: 100%;
-    max-width: 15%;
+  width: 100%;
+  max-width: 15%;
 }
 
 .phoneNumber {
-    width: 100%;
-    max-width: 20%;
+  width: 100%;
+  max-width: 20%;
 }
 
 .placement {
-    width: 100%;
+  width: 100%;
 }
 
 .parameter:not(:first-child) {
-    margin-left: 2px;
+  margin-left: 2px;
 }

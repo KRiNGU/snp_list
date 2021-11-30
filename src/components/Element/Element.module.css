@@ -1,50 +1,50 @@
 .background {
-    background-color: #fff;
-    padding: 20px 100px;
-    margin: auto;
-    margin-top: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px grey;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    width: 500px;
+  background-color: #fff;
+  padding: 20px 100px;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px grey;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 500px;
 }
 
 .title {
-    text-align: center;
+  text-align: center;
 }
 
 .list {
-    list-style: none;
-    padding-left: 0;
+  list-style: none;
+  padding-left: 0;
 }
 
 .parameter {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .property {
-    margin-top: 5px;
-    padding-bottom: 3px;
-    display: flex;
-    align-items: center;
+  margin-top: 5px;
+  padding-bottom: 3px;
+  display: flex;
+  align-items: center;
 }
 
 .property:not(:last-child) {
-    border-bottom: 1px solid grey;
+  border-bottom: 1px solid grey;
 }
 
 .name {
-    min-width: 150px;
+  min-width: 150px;
 }
 
 .input {
-    width: 100%;
-    margin-left: 10px;
+  width: 100%;
+  margin-left: 10px;
 }
 
 .exitButton {
-    top: 20px;
-    right: 20px;
+  top: 20px;
+  right: 20px;
 }

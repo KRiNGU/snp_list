@@ -23,6 +23,7 @@
 .cornerButton:hover {
   margin: 0;
   border-width: 1px;
+  border-radius: 50%;
 }
 
 .cornerButton a {

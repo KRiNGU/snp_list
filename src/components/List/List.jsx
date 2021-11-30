@@ -9,6 +9,7 @@ import { addElement } from '../../state/List/reducer';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import queryString from 'query-string';
+import Button from '../Button/Button';
 
 const List = () => {
   const dispatch = useDispatch();
@@ -18,20 +19,26 @@ const List = () => {
   const filterWord = parsedLocation.search?.toLowerCase();
 
   const handleAdd = useCallback(() => {
-    dispatch(addElement({newId}));
+    dispatch(addElement({ newId }));
   }, [dispatch, newId]);
 
-  const doFilter = useCallback((items) => {
-    if (!filterWord) {
-      return items;
-    }
-    return items.filter(item => item.id.includes(filterWord) 
-                                || item.name.toLowerCase().includes(filterWord) 
-                                || item.phoneNumber.includes(filterWord) 
-                                || item.placement.toLowerCase().includes(filterWord))
-  }, [filterWord]);
+  const doFilter = useCallback(
+    (items) => {
+      if (!filterWord) {
+        return items;
+      }
+      return items.filter(
+        (item) =>
+          item.id.includes(filterWord) ||
+          item.name.toLowerCase().includes(filterWord) ||
+          item.phoneNumber.includes(filterWord) ||
+          item.placement.toLowerCase().includes(filterWord)
+      );
+    },
+    [filterWord]
+  );
 
-  const items = useSelector(state => doFilter(state.items));
+  const items = useSelector((state) => doFilter(state.items));
 
   return (
     <div className={styles.list}>
@@ -46,11 +53,11 @@ const List = () => {
           placement={item.placement}
         />
       ))}
-      <button className={styles.cornerButton} onClick={handleAdd}>
+      <Button className={styles.cornerButton} onClick={handleAdd}>
         <Link to={`/items/${newId}`}>
-          <IoIosAddCircle color='black' size="40px" />
+          <IoIosAddCircle color="black" size="40px" />
         </Link>
-      </button>
+      </Button>
     </div>
   );
 };

@@ -8,18 +8,20 @@ import {
   changePhoneNumber,
   changePlacement,
 } from '../../state/List/reducer';
-import classnames from 'classnames';
+import Button from '../Button/Button';
 
 const Element = () => {
   const { id } = useParams();
-  const userInfo = useSelector((state) => state.items.find(item => item.id === id));
+  const userInfo = useSelector((state) =>
+    state.items.find((item) => item.id === id)
+  );
   const [name, setName] = useState(userInfo?.name);
   const [phoneNumber, setPhoneNumber] = useState(userInfo?.phoneNumber);
   const [placement, setPlacement] = useState(userInfo?.placement);
   const dispatch = useDispatch();
   const handleChangeName = useCallback(
     (e) => {
-      const value = e.target.value;  
+      const value = e.target.value;
       dispatch(changeName({ id, value }));
       setName(value);
     },
@@ -45,16 +47,16 @@ const Element = () => {
   );
 
   if (!userInfo) {
-    return(<h2>Отсутствует пользователь с таким id</h2>)
+    return <h2>Отсутствует пользователь с таким id</h2>;
   }
-  
+
   return (
     <div className={styles.background}>
-      <button className={classnames("button", styles.exitButton)}>
+      <Button className={styles.exitButton}>
         <Link to="/">
           <AiOutlineArrowLeft color="black" />
         </Link>
-      </button>
+      </Button>
       <h2 className={styles.title}>Информация о человеке</h2>
       <ul className={styles.list}>
         <li className={styles.property}>
@@ -63,33 +65,33 @@ const Element = () => {
         </li>
         <li className={styles.property}>
           <div className={styles.name}>ФИО:</div>
-            <input
-              type="text"
-              className={styles.input}
-              value={name}
-              onChange={handleChangeName}
-              placeholder="Введите имя"
-            />
+          <input
+            type="text"
+            className={styles.input}
+            value={name}
+            onChange={handleChangeName}
+            placeholder="Введите имя"
+          />
         </li>
         <li className={styles.property}>
           <div className={styles.name}>Номер телефона:</div>
-            <input
-              type="text"
-              className={styles.input}
-              value={phoneNumber}
-              onChange={handleChangePhoneNumber}
-              placeholder="Введите телефон"
-            />
+          <input
+            type="text"
+            className={styles.input}
+            value={phoneNumber}
+            onChange={handleChangePhoneNumber}
+            placeholder="Введите телефон"
+          />
         </li>
         <li className={styles.property}>
           <div className={styles.name}>Место проживания:</div>
-            <input
-              type="text"
-              className={styles.input}
-              value={placement}
-              onChange={handleChangePlacement}
-              placeholder="Введите адрес проживания"
-            />
+          <input
+            type="text"
+            className={styles.input}
+            value={placement}
+            onChange={handleChangePlacement}
+            placeholder="Введите адрес проживания"
+          />
         </li>
       </ul>
     </div>

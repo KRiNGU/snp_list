@@ -5,16 +5,16 @@ import Element from './components/Element/Element';
 import { memo } from 'react';
 
 const App = () => (
-    <Router basename="/snp_list">
-        <Switch>
-          <Route exact path="/">
-            <List />
-          </Route>
-          <Route path="/items/:id">
-            <Element /> 
-          </Route>
-        </Switch>
-    </Router>
+  <Router basename="/snp_list">
+    <Switch>
+      <Route exact path="/">
+        <List />
+      </Route>
+      <Route path="/items/:id">
+        <Element />
+      </Route>
+    </Switch>
+  </Router>
 );
 
 export default memo(App);

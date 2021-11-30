@@ -16,6 +16,25 @@
     padding-right: 5px;
 }
 
+.id {
+    width: 100%;
+    max-width: 7%;
+}
+
+.name {
+    width: 100%;
+    max-width: 15%;
+}
+
+.phoneNumber {
+    width: 100%;
+    max-width: 20%;
+}
+
+.placement {
+    width: 100%;
+}
+
 .parameter:not(:first-child) {
     margin-left: 2px;
 }

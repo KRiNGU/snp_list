@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/snp_list/static/css/main.e848aa2d.chunk.css",
-    "main.js": "/snp_list/static/js/main.d9f2c272.chunk.js",
-    "main.js.map": "/snp_list/static/js/main.d9f2c272.chunk.js.map",
+    "main.css": "/snp_list/static/css/main.d849292b.chunk.css",
+    "main.js": "/snp_list/static/js/main.71111c4e.chunk.js",
+    "main.js.map": "/snp_list/static/js/main.71111c4e.chunk.js.map",
     "runtime-main.js": "/snp_list/static/js/runtime-main.459f195e.js",
     "runtime-main.js.map": "/snp_list/static/js/runtime-main.459f195e.js.map",
     "static/js/2.ecb913cf.chunk.js": "/snp_list/static/js/2.ecb913cf.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.4822569b.chunk.js": "/snp_list/static/js/3.4822569b.chunk.js",
     "static/js/3.4822569b.chunk.js.map": "/snp_list/static/js/3.4822569b.chunk.js.map",
     "index.html": "/snp_list/index.html",
-    "static/css/main.e848aa2d.chunk.css.map": "/snp_list/static/css/main.e848aa2d.chunk.css.map",
+    "static/css/main.d849292b.chunk.css.map": "/snp_list/static/css/main.d849292b.chunk.css.map",
     "static/js/2.ecb913cf.chunk.js.LICENSE.txt": "/snp_list/static/js/2.ecb913cf.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.459f195e.js",
     "static/js/2.ecb913cf.chunk.js",
-    "static/css/main.e848aa2d.chunk.css",
-    "static/js/main.d9f2c272.chunk.js"
+    "static/css/main.d849292b.chunk.css",
+    "static/js/main.71111c4e.chunk.js"
   ]
 }

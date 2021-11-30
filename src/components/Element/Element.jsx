@@ -8,7 +8,7 @@ import {
   changePhoneNumber,
   changePlacement,
 } from '../../state/List/reducer';
-import cx from 'classnames';
+import classnames from 'classnames';
 
 const Element = () => {
   const { id } = useParams();
@@ -50,7 +50,7 @@ const Element = () => {
   
   return (
     <div className={styles.background}>
-      <button className={cx("button", styles.exitButton)}>
+      <button className={classnames("button", styles.exitButton)}>
         <Link to="/">
           <AiOutlineArrowLeft color="black" />
         </Link>

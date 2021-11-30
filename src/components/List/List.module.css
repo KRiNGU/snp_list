@@ -5,7 +5,7 @@
   padding-left: 10px;
 }
 
-.button__corner {
+.cornerButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,11 +20,11 @@
   width: 100px;
 }
 
-.button__corner:hover {
+.cornerButton:hover {
   margin: 0;
   border-width: 1px;
 }
 
-.button__corner a {
+.cornerButton a {
   height: 40px;
 }

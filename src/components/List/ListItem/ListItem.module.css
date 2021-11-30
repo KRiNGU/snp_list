@@ -1,4 +1,4 @@
-.list__item {
+.item {
     position: relative;
     display: flex;
     list-style-type: none;
@@ -11,11 +11,11 @@
     margin-top: 5px;
 }
 
-.list_item:first-child {
+.item:first-child {
     margin-top: 0;
 }
 
-.item__property {
+.property {
     font-family:'Times New Roman', Times, serif;
     word-wrap: break-word;
     padding-right: 5px;
@@ -41,17 +41,21 @@
     width: 100%;
 }
 
-.item__change {
+.buttonChange {
     visibility: hidden;
     right: 10px;
     margin: 0;
 }
 
-.item__delete {
+.buttonDelete {
     visibility: hidden;
     right: 40px;
 }
 
-.list__item:hover .button {
+.item:hover .buttonChange {
+    visibility: visible;
+}
+
+.item:hover .buttonDelete {
     visibility: visible;
 }

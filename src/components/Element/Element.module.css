@@ -1,4 +1,4 @@
-.element__background {
+.background {
     background-color: #fff;
     padding: 20px 100px;
     margin: auto;
@@ -11,51 +11,40 @@
     width: 500px;
 }
 
-.element__title {
+.title {
     text-align: center;
 }
 
-.element__list {
+.list {
     list-style: none;
     padding-left: 0;
 }
 
-.element__property {
+.parameter {
+    margin-left: 10px;
+}
+
+.property {
     margin-top: 5px;
     padding-bottom: 3px;
     display: flex;
     align-items: center;
 }
 
-.element__property:not(:last-child) {
+.property:not(:last-child) {
     border-bottom: 1px solid grey;
 }
 
-.property__name {
+.name {
     min-width: 150px;
 }
 
-.change__property {
+.input {
     width: 100%;
     margin-left: 10px;
 }
 
-.button__exit {
+.exitButton {
     top: 20px;
     right: 20px;
-}
-
-.button {
-    width: 18px;
-    height: 18px;
-    position: absolute;
-    padding: 1px;
-    background: none;
-    cursor: pointer;
-    border: 1px solid transparent;
-}
-
-.button:hover {
-    border-radius: 5px;
-    border-color: grey;
 }

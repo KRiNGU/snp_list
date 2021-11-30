@@ -3,7 +3,7 @@ import { IoIosAddCircle } from 'react-icons/io';
 import Filter from './Filter/Filter';
 import ListItem from './ListItem/ListItem';
 import ListParameters from './ListParameters/ListParameters';
-import './List.css';
+import styles from './List.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addElement } from '../../state/List/reducer';
 import { Link } from 'react-router-dom';
@@ -34,7 +34,7 @@ const List = () => {
   const items = useSelector(state => doFilter(state.items));
 
   return (
-    <div className="list">
+    <div className={styles.list}>
       <Filter />
       <ListParameters />
       {items.map((item) => (
@@ -46,7 +46,7 @@ const List = () => {
           placement={item.placement}
         />
       ))}
-      <button className="button__corner" onClick={handleAdd}>
+      <button className={styles.cornerButton} onClick={handleAdd}>
         <Link to={`/items/${newId}`}>
           <IoIosAddCircle color='black' size="40px" />
         </Link>

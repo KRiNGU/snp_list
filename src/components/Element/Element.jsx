@@ -1,5 +1,5 @@
 import { memo, useCallback, useState } from 'react';
-import './Element.css';
+import styles from './Element.module.css';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +8,7 @@ import {
   changePhoneNumber,
   changePlacement,
 } from '../../state/List/reducer';
+import cx from 'classnames';
 
 const Element = () => {
   const { id } = useParams();
@@ -48,43 +49,43 @@ const Element = () => {
   }
   
   return (
-    <div className="element__background">
-      <button className="button button__exit">
+    <div className={styles.background}>
+      <button className={cx("button", styles.exitButton)}>
         <Link to="/">
           <AiOutlineArrowLeft color="black" />
         </Link>
       </button>
-      <h2 className="element__title">Информация о человеке</h2>
-      <ul className="element__list">
-        <li className="element__property" id="property__id">
-          <div className="property__name">ID:</div>
-          <div className="property__parameter">{id}</div>
+      <h2 className={styles.title}>Информация о человеке</h2>
+      <ul className={styles.list}>
+        <li className={styles.property}>
+          <div className={styles.name}>ID:</div>
+          <div className={styles.parameter}>{id}</div>
         </li>
-        <li className="element__property" id="property__name">
-          <div className="property__name">ФИО:</div>
+        <li className={styles.property}>
+          <div className={styles.name}>ФИО:</div>
             <input
               type="text"
-              className="change__property"
+              className={styles.input}
               value={name}
               onChange={handleChangeName}
               placeholder="Введите имя"
             />
         </li>
-        <li className="element__property" id="property__phoneNumber">
-          <div className="property__name">Номер телефона:</div>
+        <li className={styles.property}>
+          <div className={styles.name}>Номер телефона:</div>
             <input
               type="text"
-              className="change__property"
+              className={styles.input}
               value={phoneNumber}
               onChange={handleChangePhoneNumber}
               placeholder="Введите телефон"
             />
         </li>
-        <li className="element__property" id="property__placement">
-          <div className="property__name">Место проживания:</div>
+        <li className={styles.property}>
+          <div className={styles.name}>Место проживания:</div>
             <input
               type="text"
-              className="change__property"
+              className={styles.input}
               value={placement}
               onChange={handleChangePlacement}
               placeholder="Введите адрес проживания"

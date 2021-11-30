@@ -1,6 +1,6 @@
 import { memo, useCallback } from 'react';
 import { useHistory } from 'react-router';
-import './Filter.css';
+import styles from './Filter.module.css';
 
 const Filter = () => {
     const history = useHistory();
@@ -10,7 +10,7 @@ const Filter = () => {
     }, [history]);
 
     return(
-        <input type="text" className="filter-input" placeholder="Type to search..." onChange={handleChange}/>
+        <input type="text" className={styles.input} placeholder="Type to search..." onChange={handleChange}/>
     );
 }
 

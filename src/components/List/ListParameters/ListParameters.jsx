@@ -1,12 +1,13 @@
 import { memo } from 'react';
-import './ListParameters.css';
+import styles from './ListParameters.module.css';
+import cx from 'classnames';
 
 const ListParameters = () => (
-    <li className="parameters">
-        <div className="parameter id">ID</div>
-        <div className="parameter name">Name</div>
-        <div className="parameter phoneNumber">Phone Number</div>
-        <div className="parameter placement">Place of Residence</div>
+    <li className={styles.parameters}>
+        <div className={cx(styles.parameter, styles.id)}>ID</div>
+        <div className={cx(styles.parameter, styles.name)}>Name</div>
+        <div className={cx(styles.parameter, styles.phoneNumber)}>Phone Number</div>
+        <div className={cx(styles.parameter, styles.placement)}>Place of Residence</div>
     </li>
 );
 

@@ -6,7 +6,7 @@ const Filter = () => {
     const history = useHistory();
 
     const handleChange = useCallback((e) => {
-        history.replace(e.target.value ? `/?search=${e.target.value}` : history.replace('/'));
+        history.replace(e.target.value ? `/?search=${e.target.value}` : '/');
     }, [history]);
 
     return(

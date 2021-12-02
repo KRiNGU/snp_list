@@ -7,7 +7,7 @@ import {
   changeName,
   changePhoneNumber,
   changePlacement,
-} from '../../state/List/reducer';
+} from '../../redux/List/reducer';
 import Button from '../Button/Button';
 
 const Element = () => {

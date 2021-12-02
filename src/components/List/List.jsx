@@ -5,7 +5,7 @@ import ListItem from './ListItem/ListItem';
 import ListParameters from './ListParameters/ListParameters';
 import styles from './List.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addElement } from '../../state/List/reducer';
+import { addElement } from '../../redux/List/reducer';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import queryString from 'query-string';

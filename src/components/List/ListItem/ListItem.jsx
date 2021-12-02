@@ -4,7 +4,7 @@ import { MdOutlineOpenInFull } from 'react-icons/md';
 import { AiFillDelete } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { deleteElement } from '../../../state/List/reducer';
+import { deleteElement } from '../../../redux/List/reducer';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Button from '../../Button/Button';

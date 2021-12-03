@@ -117,7 +117,7 @@ const Element = ({ newId }) => {
         </li>
       </ul>
       <Button onClick={handleChangeContact} className={styles.saveButton}>
-        Сохранить
+        {newId ? 'Создать' : 'Сохранить'}
       </Button>
     </div>
   );

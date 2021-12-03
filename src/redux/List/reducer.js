@@ -1,8 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    items: JSON.parse(localStorage.getItem('items')) || [],
+    items: [],
 };
+
+export const listAdatpter = createEntityAdapter({
+    selectId: (e) => e.id,
+    sortComparer: (a, b) => a.name.localeCompare(b.name),
+});
 
 export const listSlice = createSlice({
     name: 'list',
@@ -10,27 +15,30 @@ export const listSlice = createSlice({
     reducers: {
         changeName: (state, {payload}) => {
             state.items.find(item => item.id === payload.id).name = payload.value;
-            localStorage.setItem('items', JSON.stringify(state.items));
         },
         changePhoneNumber: (state, {payload}) => {
             state.items.find(item => item.id === payload.id).phoneNumber = payload.value;
-            localStorage.setItem('items', JSON.stringify(state.items));
         },
         changePlacement: (state, {payload}) => {
             state.items.find(item => item.id === payload.id).placement = payload.value;
-            localStorage.setItem('items', JSON.stringify(state.items));
         },
-        addElement: (state, {payload: {newId}}) => {
-            state.items.push({id: newId, name: '', phoneNumber: '', placement: ''});
-            localStorage.setItem('items', JSON.stringify(state.items));
+        addContact: (state, {payload: {id}}) => {
+            state.items.push({id, name: '', phoneNumber: '', placement: ''});
         },
-        deleteElement: (state, {payload: {id}}) => {
+        deleteContact: (state, {payload: {id}}) => {
             state.items = state.items.filter(item => item.id !== id);
-            localStorage.setItem('items', JSON.stringify(state.items));
         },
+        loadList: (state, {payload}) => {
+            state.items = payload;
+        },
+        loadContact: (state, {payload: {id, name, phoneNumber, placement}}) => {
+            if (!state.items.find((item) => item.id === id)) {
+                state.items.push({id, name, phoneNumber, placement});
+            }
+        }
     },
 });
 
-export const {changeName, changePhoneNumber, changePlacement, addElement, deleteElement} = listSlice.actions;
+export const {changeName, changePhoneNumber, changePlacement, addContact, deleteContact, loadList, loadContact} = listSlice.actions;
 
 export default listSlice.reducer;

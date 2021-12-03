@@ -1,11 +1,10 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import { IoIosAddCircle } from 'react-icons/io';
 import Filter from './Filter/Filter';
 import ListItem from './ListItem/ListItem';
 import ListParameters from './ListParameters/ListParameters';
 import styles from './List.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addElement } from '../../redux/List/reducer';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import queryString from 'query-string';
@@ -14,12 +13,14 @@ import Button from '../Button/Button';
 const List = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  useEffect(() => dispatch({type: 'LOAD_LIST'}), [dispatch]);
   const parsedLocation = queryString.parse(location.search);
   const newId = Date.now().toString().slice(1);
   const filterWord = parsedLocation.search?.toLowerCase();
+  
 
   const handleAdd = useCallback(() => {
-    dispatch(addElement({ newId }));
+    dispatch({type: 'ADD_ELEMENT', payload: {id: newId}});
   }, [dispatch, newId]);
 
   const doFilter = useCallback(

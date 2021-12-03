@@ -1,49 +1,45 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useState, useEffect } from 'react';
 import styles from './Element.module.css';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  changeName,
-  changePhoneNumber,
-  changePlacement,
-} from '../../redux/List/reducer';
 import Button from '../Button/Button';
 
 const Element = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  useEffect(() => dispatch({type: 'LOAD_CONTACT', payload: {id}}), [dispatch, id]);
   const userInfo = useSelector((state) =>
     state.items.find((item) => item.id === id)
   );
   const [name, setName] = useState(userInfo?.name);
   const [phoneNumber, setPhoneNumber] = useState(userInfo?.phoneNumber);
   const [placement, setPlacement] = useState(userInfo?.placement);
-  const dispatch = useDispatch();
   const handleChangeName = useCallback(
     (e) => {
       const value = e.target.value;
-      dispatch(changeName({ id, value }));
+      dispatch({type: 'CHANGE_NAME', payload: {id, name: value, phoneNumber, placement}});
       setName(value);
     },
-    [dispatch, setName, id]
+    [dispatch, setName, id, phoneNumber, placement]
   );
 
   const handleChangePhoneNumber = useCallback(
     (e) => {
       const value = e.target.value;
-      dispatch(changePhoneNumber({ id, value }));
+      dispatch({type: 'CHANGE_PHONE', payload: {id, name, phoneNumber: value, placement}});
       setPhoneNumber(value);
     },
-    [dispatch, setPhoneNumber, id]
+    [dispatch, setPhoneNumber, id, name, placement]
   );
 
   const handleChangePlacement = useCallback(
     (e) => {
       const value = e.target.value;
-      dispatch(changePlacement({ id, value }));
+      dispatch({type: 'CHANGE_PLACEMENT', payload: {id, name, phoneNumber, placement: value}});
       setPlacement(value);
     },
-    [dispatch, setPlacement, id]
+    [dispatch, setPlacement, id, name, phoneNumber]
   );
 
   if (!userInfo) {

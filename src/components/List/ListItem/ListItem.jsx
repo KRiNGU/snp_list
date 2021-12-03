@@ -4,7 +4,6 @@ import { MdOutlineOpenInFull } from 'react-icons/md';
 import { AiFillDelete } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { deleteElement } from '../../../redux/List/reducer';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Button from '../../Button/Button';
@@ -12,7 +11,7 @@ import Button from '../../Button/Button';
 const ListItem = ({ id, name, phoneNumber, placement }) => {
   const dispatch = useDispatch();
   const handleDelete = useCallback(
-    () => dispatch(deleteElement({ id })),
+    () => dispatch({type: 'DELETE_CONTACT', payload: {id}}),
     [dispatch, id]
   );
 

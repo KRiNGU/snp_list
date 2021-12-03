@@ -1,61 +1,26 @@
 import {fork, takeEvery, call, put} from 'redux-saga/effects';
-import {changeName, changePhoneNumber, changePlacement, loadList, addContact, deleteContact, loadContact} from './reducer';
+import {loadList, addContact, deleteContact, loadContact, changeContact} from './reducer';
 import {addContact as addContactApi, getList as getListApi, changeContact as changeContactApi, deleteContact as deleteContactApi, getContactById as getContactByIdApi} from '../../api/List';
 
-////////////////////////////////          CHANGE SOME PARAMETER          ///////////////////////////////
+////////////////////////////////          CHANGE CONTACT          ///////////////////////////////
 
-// NAME
 
-async function doChangeName({id, name, phoneNumber, placement}) {
+async function doChangeContact({id, name, phoneNumber, placement}) {
     await changeContactApi({id, name, phoneNumber, placement});
 }
 
-export function* changeNameSaga({id, name, phoneNumber, placement}) {
-    yield call(doChangeName, {id, name, phoneNumber, placement});
+export function* changeContactSaga({id, name, phoneNumber, placement}) {
+    yield call(doChangeContact, {id, name, phoneNumber, placement});
 
-    yield put(changeName({id, value: name}));
+    yield put(changeContact({id, name, phoneNumber, placement}));
 }
 
-export function* workChangeNameSaga ({payload}) {
-    yield fork(changeNameSaga, payload);
-}
-
-// PHONE
-
-async function doChangePhone({id, name, phoneNumber, placement}) {
-    await changeContactApi({id, name, phoneNumber, placement});
-}
-
-export function* changePhoneSaga({id, name, phoneNumber, placement}) {
-    yield call(doChangePhone, {id, name, phoneNumber, placement});
-
-    yield put(changePhoneNumber({id, value: phoneNumber}));
-}
-
-export function* workChangePhoneSaga ({payload}) {
-    yield fork(changePhoneSaga, payload);
-}
-
-// PLACEMENT
-
-async function doChangePlacement({id, name, phoneNumber, placement}) {
-    await changeContactApi({id, name, phoneNumber, placement});
-}
-
-export function* changePlacementSaga({id, name, phoneNumber, placement}) {
-    yield call(doChangePlacement, {id, name, phoneNumber, placement});
-
-    yield put(changePlacement({id, value: placement}));
-}
-
-export function* workChangePlacementSaga ({payload}) {
-    yield fork(changePlacementSaga, payload);
+export function* workChangeContactSaga ({payload}) {
+    yield fork(changeContactSaga, payload);
 }
 
 export function* watchChangeSaga () {
-    yield takeEvery('CHANGE_NAME', workChangeNameSaga);
-    yield takeEvery('CHANGE_PHONE', workChangePhoneSaga);
-    yield takeEvery('CHANGE_PLACEMENT', workChangePlacementSaga);
+    yield takeEvery('CHANGE_CONTACT', workChangeContactSaga);
 }
 
 ////////////////////////////////          GET LIST OF CONTACTS          ///////////////////////////////
@@ -82,7 +47,7 @@ export function* watchGetListSaga () {
 
 ////////////////////////////////          GET CONTACT         ///////////////////////////////
 
-async function doGetContact ({id}) {
+export async function doGetContact ({id}) {
     const response = await getContactByIdApi({id});
 
     return response.data;

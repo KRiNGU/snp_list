@@ -7,47 +7,65 @@ import Button from '../Button/Button';
 
 const Element = () => {
   const { id } = useParams();
-  const dispatch = useDispatch();
-  useEffect(() => dispatch({type: 'LOAD_CONTACT', payload: {id}}), [dispatch, id]);
   const userInfo = useSelector((state) =>
     state.items.find((item) => item.id === id)
   );
   const [name, setName] = useState(userInfo?.name);
   const [phoneNumber, setPhoneNumber] = useState(userInfo?.phoneNumber);
   const [placement, setPlacement] = useState(userInfo?.placement);
+  useEffect(() => {
+    setName(userInfo?.name ?? '');
+    setPhoneNumber(userInfo?.phoneNumber ?? '');
+    setPlacement(userInfo?.placement ?? '');
+  }, [userInfo]);
+  const dispatch = useDispatch();
+  useEffect(
+    () => dispatch({ type: 'LOAD_CONTACT', payload: { id } }),
+    [dispatch, id]
+  );
   const handleChangeName = useCallback(
     (e) => {
       const value = e.target.value;
-      dispatch({type: 'CHANGE_NAME', payload: {id, name: value, phoneNumber, placement}});
       setName(value);
     },
-    [dispatch, setName, id, phoneNumber, placement]
+    [setName]
   );
 
   const handleChangePhoneNumber = useCallback(
     (e) => {
       const value = e.target.value;
-      dispatch({type: 'CHANGE_PHONE', payload: {id, name, phoneNumber: value, placement}});
       setPhoneNumber(value);
     },
-    [dispatch, setPhoneNumber, id, name, placement]
+    [setPhoneNumber]
   );
 
   const handleChangePlacement = useCallback(
     (e) => {
       const value = e.target.value;
-      dispatch({type: 'CHANGE_PLACEMENT', payload: {id, name, phoneNumber, placement: value}});
       setPlacement(value);
     },
-    [dispatch, setPlacement, id, name, phoneNumber]
+    [setPlacement]
   );
+
+  const handleChangeContact = useCallback(() => {
+    dispatch({
+      type: 'CHANGE_CONTACT',
+      payload: { id, name, phoneNumber, placement },
+    });
+  }, [dispatch, id, name, phoneNumber, placement]);
+
+  const handleKeyDown = useCallback((e) => {
+    if (e.key === 'Enter') {
+      handleChangeContact();
+    }
+  }, [handleChangeContact]);
 
   if (!userInfo) {
     return <h2>Отсутствует пользователь с таким id</h2>;
   }
 
   return (
-    <div className={styles.background}>
+    <div className={styles.background} onKeyDown={handleKeyDown}>
       <Button className={styles.exitButton}>
         <Link to="/">
           <AiOutlineArrowLeft color="black" />
@@ -90,6 +108,9 @@ const Element = () => {
           />
         </li>
       </ul>
+      <Button onClick={handleChangeContact} className={styles.saveButton}>
+        Сохранить
+      </Button>
     </div>
   );
 };

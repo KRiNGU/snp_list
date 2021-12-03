@@ -48,3 +48,18 @@
   top: 20px;
   right: 20px;
 }
+
+.saveButton {
+  width: 200px;
+  height: auto;
+  line-height: 40px;
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  margin: auto;
+  background-color: rgb(206, 255, 183);
+}
+
+.saveButton:hover {
+  border-color: grey;
+}

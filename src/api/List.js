@@ -18,12 +18,12 @@ export const getList = () =>
 export const getContactById = ({id}) =>
     mainAxios.get(`/items/${id}`);
 
-export const addContact = ({id}) =>
+export const addContact = ({id, name, phoneNumber, placement}) =>
     mainAxios.post(`/items/`, {
         id: id,
-        name: '',
-        phoneNumber: '',
-        placement: '',
+        name: name,
+        phoneNumber: phoneNumber,
+        placement: placement,
     });
 
 export const changeContact = ({id, name, phoneNumber, placement}) =>

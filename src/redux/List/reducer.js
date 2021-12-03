@@ -14,8 +14,8 @@ export const listSlice = createSlice({
             item.phoneNumber = phoneNumber;
             item.placement = placement;
         },
-        addContact: (state, {payload: {id}}) => {
-            state.items.push({id, name: '', phoneNumber: '', placement: ''});
+        addContact: (state, {payload: {id, name, phoneNumber, placement}}) => {
+            state.items.push({id, name, phoneNumber, placement});
         },
         deleteContact: (state, {payload: {id}}) => {
             state.items = state.items.filter(item => item.id !== id);

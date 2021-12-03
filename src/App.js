@@ -10,8 +10,11 @@ const App = () => (
       <Route exact path="/">
         <List />
       </Route>
+      <Route path="/items/new">
+        <Element newId />
+      </Route>
       <Route path="/items/:id">
-        <Element />
+        <Element newId={false} />
       </Route>
     </Switch>
   </Router>

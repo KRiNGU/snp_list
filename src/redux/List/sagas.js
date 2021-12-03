@@ -70,14 +70,14 @@ export function* watchGetContactSaga () {
 
 ////////////////////////////////          ADD CONTACT          ///////////////////////////////
 
-async function doAddContact (id) {
-    await addContactApi(id);
+async function doAddContact ({id, name, phoneNumber, placement}) {
+    await addContactApi({id, name, phoneNumber, placement});
 }
 
-export function* addContactSaga ({id}) {
-    yield call(doAddContact, {id: id});
+export function* addContactSaga ({id, name, phoneNumber, placement}) {
+    yield call(doAddContact, {id, name, phoneNumber, placement});
 
-    yield put(addContact({id: id}));
+    yield put(addContact({id, name, phoneNumber, placement}));
 }
 
 export function* workAddContactSaga ({payload}) {
@@ -85,7 +85,7 @@ export function* workAddContactSaga ({payload}) {
 }
 
 export function* watchAddContactSaga () {
-    yield takeEvery('ADD_ELEMENT', workAddContactSaga);
+    yield takeEvery('ADD_CONTACT', workAddContactSaga);
 }
 
 ////////////////////////////////          DELETE CONTACT          ///////////////////////////////

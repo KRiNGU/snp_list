@@ -5,23 +5,22 @@ import ListItem from './ListItem/ListItem';
 import ListParameters from './ListParameters/ListParameters';
 import styles from './List.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import queryString from 'query-string';
 import Button from '../Button/Button';
 
 const List = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const history = useHistory();
   useEffect(() => dispatch({type: 'LOAD_LIST'}), [dispatch]);
   const parsedLocation = queryString.parse(location.search);
-  const newId = Date.now().toString().slice(1);
   const filterWord = parsedLocation.search?.toLowerCase();
   
 
   const handleAdd = useCallback(() => {
-    dispatch({type: 'ADD_ELEMENT', payload: {id: newId}});
-  }, [dispatch, newId]);
+    history.push(`/items/new`);
+  }, [history]);
 
   const doFilter = useCallback(
     (items) => {
@@ -55,9 +54,7 @@ const List = () => {
         />
       ))}
       <Button className={styles.cornerButton} onClick={handleAdd}>
-        <Link to={`/items/${newId}`}>
-          <IoIosAddCircle color="black" size="40px" />
-        </Link>
+        <IoIosAddCircle color="black" size="40px" />
       </Button>
     </div>
   );

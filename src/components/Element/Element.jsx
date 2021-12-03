@@ -1,28 +1,33 @@
-import { memo, useCallback, useState, useEffect } from 'react';
+import { memo, useCallback, useState, useEffect, useRef } from 'react';
 import styles from './Element.module.css';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button/Button';
 
-const Element = () => {
-  const { id } = useParams();
+const Element = ({ newId }) => {
+  let { id } = useParams();
+  const dispatch = useDispatch();
+  const nextId = useRef(Date.now().toString().slice(1));
+  if (newId) {
+    id = nextId.current;
+  };
   const userInfo = useSelector((state) =>
     state.items.find((item) => item.id === id)
   );
-  const [name, setName] = useState(userInfo?.name);
-  const [phoneNumber, setPhoneNumber] = useState(userInfo?.phoneNumber);
-  const [placement, setPlacement] = useState(userInfo?.placement);
+  const [name, setName] = useState(userInfo?.name ?? '');
+  const [phoneNumber, setPhoneNumber] = useState(userInfo?.phoneNumber ?? '');
+  const [placement, setPlacement] = useState(userInfo?.placement ?? '');
   useEffect(() => {
     setName(userInfo?.name ?? '');
     setPhoneNumber(userInfo?.phoneNumber ?? '');
     setPlacement(userInfo?.placement ?? '');
   }, [userInfo]);
-  const dispatch = useDispatch();
-  useEffect(
-    () => dispatch({ type: 'LOAD_CONTACT', payload: { id } }),
-    [dispatch, id]
-  );
+  useEffect(() => {
+    if (!newId) {
+      dispatch({ type: 'LOAD_CONTACT', payload: { id } });
+    }
+  }, [dispatch, id, newId]);
   const handleChangeName = useCallback(
     (e) => {
       const value = e.target.value;
@@ -49,18 +54,21 @@ const Element = () => {
 
   const handleChangeContact = useCallback(() => {
     dispatch({
-      type: 'CHANGE_CONTACT',
+      type: newId ? 'ADD_CONTACT' : 'CHANGE_CONTACT',
       payload: { id, name, phoneNumber, placement },
     });
-  }, [dispatch, id, name, phoneNumber, placement]);
+  }, [dispatch, id, name, phoneNumber, placement, newId]);
 
-  const handleKeyDown = useCallback((e) => {
-    if (e.key === 'Enter') {
-      handleChangeContact();
-    }
-  }, [handleChangeContact]);
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (e.key === 'Enter') {
+        handleChangeContact();
+      }
+    },
+    [handleChangeContact]
+  );
 
-  if (!userInfo) {
+  if (!userInfo && !newId) {
     return <h2>Отсутствует пользователь с таким id</h2>;
   }
 

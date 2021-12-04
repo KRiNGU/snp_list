@@ -1,120 +1,52 @@
-import {fork, takeEvery, call, put} from 'redux-saga/effects';
-import {loadList, addContact, deleteContact, loadContact, changeContact} from './reducer';
+import {takeEvery, call, put} from 'redux-saga/effects';
+import * as reducers from './reducer';
 import {addContact as addContactApi, getList as getListApi, changeContact as changeContactApi, deleteContact as deleteContactApi, getContactById as getContactByIdApi} from '../../api/List';
 
 ////////////////////////////////          CHANGE CONTACT          ///////////////////////////////
 
-
-async function doChangeContact({id, name, phoneNumber, placement}) {
-    await changeContactApi({id, name, phoneNumber, placement});
-}
-
-export function* changeContactSaga({id, name, phoneNumber, placement}) {
-    yield call(doChangeContact, {id, name, phoneNumber, placement});
-
-    yield put(changeContact({id, name, phoneNumber, placement}));
-}
-
-export function* workChangeContactSaga ({payload}) {
-    yield fork(changeContactSaga, payload);
-}
-
-export function* watchChangeSaga () {
-    yield takeEvery('CHANGE_CONTACT', workChangeContactSaga);
+export function* workChangeContactSaga ({payload: {id, name, phoneNumber, placement}}) {
+    yield call(changeContactApi, {id, name, phoneNumber, placement})
+    yield put(reducers.changeContact({id, name, phoneNumber, placement}))
 }
 
 ////////////////////////////////          GET LIST OF CONTACTS          ///////////////////////////////
 
-async function doGetList () {
-    const response = await getListApi();
-
-    return response.data;
-}
-
-export function* getListSaga () {
-    const list = yield call(doGetList);
-
-    yield put(loadList(list));
-}
-
 export function* workGetListSaga () {
-    yield fork(getListSaga);
-}
-
-export function* watchGetListSaga () {
-    yield takeEvery('LOAD_LIST', workGetListSaga);
+    const response = yield call(getListApi);
+    yield put(reducers.loadList(response.data));
 }
 
 ////////////////////////////////          GET CONTACT         ///////////////////////////////
 
-export async function doGetContact ({id}) {
-    const response = await getContactByIdApi({id});
-
-    return response.data;
-}
-
-export function* getContactSaga ({id}) {
-    const contact = yield call(doGetContact, {id});
-
-    yield put(loadContact(contact));
-}
-
-
 export function* workGetContactSaga ({payload}) {
-    yield fork(getContactSaga, payload);
-}
-
-export function* watchGetContactSaga () {
-    yield takeEvery('LOAD_CONTACT', workGetContactSaga);
+    try {
+        const response = yield call(getContactByIdApi, {id: payload.id});
+        yield put(reducers.loadContactSuccess(response.data));
+    } catch (err) {
+        yield put(reducers.loadContactFailure())
+    }
 }
 
 ////////////////////////////////          ADD CONTACT          ///////////////////////////////
 
-async function doAddContact ({id, name, phoneNumber, placement}) {
-    await addContactApi({id, name, phoneNumber, placement});
-}
-
-export function* addContactSaga ({id, name, phoneNumber, placement}) {
-    yield call(doAddContact, {id, name, phoneNumber, placement});
-
-    yield put(addContact({id, name, phoneNumber, placement}));
-}
-
-export function* workAddContactSaga ({payload}) {
-    yield fork(addContactSaga, payload);
-}
-
-export function* watchAddContactSaga () {
-    yield takeEvery('ADD_CONTACT', workAddContactSaga);
+export function* workAddContactSaga ({payload: {id, name, phoneNumber, placement}}) {
+    yield call(addContactApi, {id, name, phoneNumber, placement});
+    yield put(reducers.addContact({id, name, phoneNumber, placement}));
 }
 
 ////////////////////////////////          DELETE CONTACT          ///////////////////////////////
 
-async function doDeleteContact({id}) {
-    await deleteContactApi({id});
-}
-
-export function* deleteContactSaga ({id}) {
-    yield call(doDeleteContact, {id});
-
-    yield put(deleteContact({id}));
-}
-
-export function* workDeleteContact ({payload}) {
-    yield fork(deleteContactSaga, payload);
-}
-
-export function* watchDeleteContactSaga() {
-    yield takeEvery('DELETE_CONTACT', workDeleteContact)
+export function* workDeleteContact ({payload: {id}}) {
+    yield call(deleteContactApi, {id});
+    yield put(reducers.deleteContact({id}))
 }
 
 ////////////////////////////////          ROOT SAGA          ///////////////////////////////
 
 export default function* rootSaga() {
-    yield fork(watchChangeSaga);
-    yield fork(watchGetListSaga);
-    yield fork(watchAddContactSaga);
-    yield fork(watchDeleteContactSaga)
-    yield fork(watchGetContactSaga);
+    yield takeEvery('CHANGE_CONTACT', workChangeContactSaga);
+    yield takeEvery('LOAD_LIST', workGetListSaga);
+    yield takeEvery('ADD_CONTACT', workAddContactSaga);
+    yield takeEvery('DELETE_CONTACT', workDeleteContact)
+    yield takeEvery('LOAD_CONTACT', workGetContactSaga);
 }
-

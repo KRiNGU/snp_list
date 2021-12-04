@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     items: [],
+    error: null,
 };
 
 export const listSlice = createSlice({
@@ -23,14 +24,18 @@ export const listSlice = createSlice({
         loadList: (state, {payload}) => {
             state.items = payload;
         },
-        loadContact: (state, {payload: {id, name, phoneNumber, placement}}) => {
+        loadContactSuccess: (state, {payload: {id, name, phoneNumber, placement}}) => {
             if (!state.items.find((item) => item.id === id)) {
                 state.items.push({id, name, phoneNumber, placement});
             }
-        }
+            state.error = 0;
+        },
+        loadContactFailure: (state) => {
+            state.error = 404;
+        },
     },
 });
 
-export const {changeContact, addContact, deleteContact, loadList, loadContact} = listSlice.actions;
+export const {changeContact, addContact, deleteContact, loadList, loadContactSuccess, loadContactFailure} = listSlice.actions;
 
 export default listSlice.reducer;

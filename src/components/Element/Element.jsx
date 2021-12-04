@@ -9,12 +9,13 @@ const Element = ({ newId }) => {
   let { id } = useParams();
   const dispatch = useDispatch();
   const nextId = useRef(Date.now().toString().slice(1));
-  if (newId) {
-    id = nextId.current;
-  };
+  const error = useSelector((state) => state.error);
   const userInfo = useSelector((state) =>
     state.items.find((item) => item.id === id)
   );
+  if (newId) {
+    id = nextId.current;
+  };
   const [name, setName] = useState(userInfo?.name ?? '');
   const [phoneNumber, setPhoneNumber] = useState(userInfo?.phoneNumber ?? '');
   const [placement, setPlacement] = useState(userInfo?.placement ?? '');
@@ -27,7 +28,8 @@ const Element = ({ newId }) => {
     if (!newId) {
       dispatch({ type: 'LOAD_CONTACT', payload: { id } });
     }
-  }, [dispatch, id, newId]);
+  }, [dispatch, id, newId, userInfo]);
+
   const handleChangeName = useCallback(
     (e) => {
       const value = e.target.value;
@@ -68,12 +70,12 @@ const Element = ({ newId }) => {
     [handleChangeContact]
   );
 
-  if (!userInfo && !newId) {
+  if (error === 404 && !newId) {
     return <h2>Отсутствует пользователь с таким id</h2>;
   }
 
   return (
-    <div className={styles.background} onKeyDown={handleKeyDown}>
+    (error === 0 || newId) && <div className={styles.background} onKeyDown={handleKeyDown}>
       <Button className={styles.exitButton}>
         <Link to="/">
           <AiOutlineArrowLeft color="black" />

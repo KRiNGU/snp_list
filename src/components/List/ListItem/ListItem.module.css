@@ -39,6 +39,8 @@
 
 .placement {
   width: 100%;
+  padding-right: 50px;
+  overflow: hidden;
 }
 
 .buttonChange {

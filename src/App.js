@@ -14,7 +14,7 @@ const App = () => (
         <Element newId />
       </Route>
       <Route path="/items/:id">
-        <Element newId={false} />
+        <Element />
       </Route>
     </Switch>
   </Router>

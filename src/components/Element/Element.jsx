@@ -4,8 +4,9 @@ import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button/Button';
+import PropTypes from 'prop-types';
 
-const Element = ({ newId }) => {
+const Element = ({ newId=false }) => {
   let { id } = useParams();
   const dispatch = useDispatch();
   const nextId = useRef(Date.now().toString().slice(1));
@@ -123,6 +124,10 @@ const Element = ({ newId }) => {
       </Button>
     </div>
   );
+};
+
+Element.propTypes = {
+  newId: PropTypes.bool,
 };
 
 export default memo(Element);

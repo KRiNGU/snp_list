@@ -5,15 +5,19 @@ import {addContact as addContactApi, getList as getListApi, changeContact as cha
 ////////////////////////////////          CHANGE CONTACT          ///////////////////////////////
 
 export function* workChangeContactSaga ({payload: {id, name, phoneNumber, placement}}) {
-    yield call(changeContactApi, {id, name, phoneNumber, placement})
-    yield put(reducers.changeContact({id, name, phoneNumber, placement}))
+    try {
+        yield call(changeContactApi, {id, name, phoneNumber, placement})
+        yield put(reducers.changeContact({id, name, phoneNumber, placement}))
+    } catch (err) {}
 }
 
 ////////////////////////////////          GET LIST OF CONTACTS          ///////////////////////////////
 
 export function* workGetListSaga () {
-    const response = yield call(getListApi);
-    yield put(reducers.loadList(response.data));
+    try {
+        const response = yield call(getListApi);
+        yield put(reducers.loadList(response.data));
+    } catch (err) {}
 }
 
 ////////////////////////////////          GET CONTACT         ///////////////////////////////
@@ -30,15 +34,19 @@ export function* workGetContactSaga ({payload}) {
 ////////////////////////////////          ADD CONTACT          ///////////////////////////////
 
 export function* workAddContactSaga ({payload: {id, name, phoneNumber, placement}}) {
-    yield call(addContactApi, {id, name, phoneNumber, placement});
-    yield put(reducers.addContact({id, name, phoneNumber, placement}));
+    try {
+        yield call(addContactApi, {id, name, phoneNumber, placement});
+        yield put(reducers.addContact({id, name, phoneNumber, placement}));
+    } catch (err) {}
 }
 
 ////////////////////////////////          DELETE CONTACT          ///////////////////////////////
 
 export function* workDeleteContact ({payload: {id}}) {
-    yield call(deleteContactApi, {id});
-    yield put(reducers.deleteContact({id}))
+    try {
+        yield call(deleteContactApi, {id});
+        yield put(reducers.deleteContact({id}))
+    } catch (err) {}
 }
 
 ////////////////////////////////          ROOT SAGA          ///////////////////////////////
